@@ -60,7 +60,95 @@ console.log();
 
 //Array tridimensional/matriz
 var matriz = [];
-matriz[0] = [1,0,0];
-matriz[1] = [0,1,0];
-matriz[2] = [0,0,1];
+matriz[0] = ['a11','a12','a13'];
+matriz[1] = ['a21','a22','a23'];
+matriz[2] = ['a31','a32','a33'];
 console.table(matriz);
+console.log(matriz[1][2]);//a23
+console.log();
+
+//Tipos derivados de Array
+
+class Pilha{
+    constructor(){
+        this.items = [];
+    }
+
+    push(elemento) {
+        this.items.push(elemento);
+    }
+
+    pop() {
+        if (this.items.length == 0 ) {
+            return 'Não tem elementos para excluir';
+        } else {
+            this.items.pop();
+        }
+    }
+
+    splice(){
+        this.items.splice(start, deleteCount);
+    }
+
+    printStack() {
+        var str = "";
+        for (var i = 0; i < this.items.length; i++) str += this.items[i] + " ";
+        return str;
+      }
+}
+
+var pilha = new Pilha();
+pilha.push('Primeiro elemento da pilha');
+pilha.push('Segundo elemento da pilha');
+pilha.push('Terceiro elemento da pilha');
+console.log(pilha);
+
+//Eliminando o Terceiro elemento da pilha
+pilha.pop();
+console.log(pilha);
+pilha.push('Adicionado terceiro elemento extra');
+pilha.push('Adicionado quarto elemento extra');
+console.log(pilha);
+console.log();
+console.log('=============Usando o splice==============')
+Pilha.prototype.splice = function(start, deleteCount) {
+    var removed = [];
+    var len = this.items.length;
+
+    start = start || 0;
+    deleteCount = deleteCount || len;
+    
+    var end = start + deleteCount;
+    end = end > len ? len : end;
+
+    for ( var i = start; i < end; i++) {
+        removed.push(this.items[i]);
+    }
+
+    var itemsAfterRemoved = [];
+    for (var i = end; i < len; i++) {
+        itemsAfterRemoved.push(this.items[i]);
+    }
+    
+    this.items.length = start;
+
+    for (var i = 2; i < arguments.length; i++) {
+        this.items.push(arguments[i]);
+    }
+
+    for (var i = 0; i < itemsAfterRemoved; i++) {
+        this.items.push(itemsAfterRemoved[i]);
+    }
+    
+    return removed;
+}
+
+var novaPilha = new Pilha();
+novaPilha.push(1);
+novaPilha.push(2);
+novaPilha.push(3);
+console.log(novaPilha.printStack());
+
+novaPilha.splice(1,1);
+console.log(novaPilha.printStack());
+
