@@ -67,7 +67,7 @@ console.table(matriz);
 console.log(matriz[1][2]);//a23
 console.log();
 
-//Tipos derivados de Array
+//Trabalhando com Pilhas
 
 class Pilha{
     constructor(){
@@ -110,6 +110,7 @@ pilha.push('Adicionado terceiro elemento extra');
 pilha.push('Adicionado quarto elemento extra');
 console.log(pilha);
 console.log();
+
 console.log('=============Usando o splice==============')
 Pilha.prototype.splice = function(start, deleteCount) {
     var removed = [];
@@ -151,4 +152,83 @@ console.log(novaPilha.printStack());
 
 novaPilha.splice(1,1);
 console.log(novaPilha.printStack());
+console.log();
 
+//Trabalhando com Filas
+class Fila {
+    constructor() {
+        this.items = [];
+    }
+
+    enqueue(elemento) {//Adicionando um elemento à fila
+        this.items.push(elemento);
+    }
+
+    dequeue() {//Eliminando o último elemento da fila
+        return this.items.shift();
+    }
+
+    peek() {//Visualiza o último elemento de um array
+        if (this.items.length === 0) {
+            return undefined;
+        } else {
+            return this.items[0];
+        }
+    }
+
+    isEmpty() {
+        return this.items.length === 0;
+    }
+
+    clear() {//limpa o console
+        this.items = [];
+    }
+
+    size() {
+        return this.items.length;
+    }
+}
+
+var novaFila = new Fila();
+novaFila.enqueue('Michael Scott');
+novaFila.enqueue('Dwight Schrute');
+novaFila.enqueue('Jim Halpert');
+console.log(novaFila);
+
+console.log(novaFila.peek());//Verifica quem está no topo da fila
+console.log(novaFila.size());//verifica o tamanho da fila
+console.log(novaFila.isEmpty());//Verifica se a fila está vazia
+novaFila.dequeue();//Remove o item que está no topo da fila
+console.log(novaFila);
+novaFila.clear();//Limpa a fila completamente
+console.log(novaFila);
+console.log();
+
+//Conjuntos (set)
+
+var meuSet = new Set();
+meuSet.add('Creed Bratton');
+meuSet.add('Deangelo Vickers');
+meuSet.add('Robert California');
+console.log(meuSet);
+meuSet.add('Robert California');//Valor duplicado. Não deve permitir adicionar
+console.log(meuSet);
+
+console.log(meuSet.has('Robert California'));
+console.log(meuSet.has('Jim Halpert'));
+console.log(meuSet.size);
+meuSet.add('Nellie Bertram');
+console.log(meuSet.size);
+meuSet.delete('Nellie Bertram');
+console.log(meuSet.size);
+
+//Iterando sobre o Set
+for (let item of meuSet) console.log(item);
+console.log();
+for (let item of meuSet.keys()) console.log(item);
+console.log();
+var arrayDuplicado = ['Nellie Bertram', 'Jim Halpert', 'Andy Bernard',
+                        'Michael Scott', 'Dwight Schrute', 'Dwight Schrute'];
+console.log(arrayDuplicado);
+//Removendo duplicados
+console.log([...new Set(arrayDuplicado)]);
