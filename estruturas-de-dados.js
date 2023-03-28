@@ -232,3 +232,35 @@ var arrayDuplicado = ['Nellie Bertram', 'Jim Halpert', 'Andy Bernard',
 console.log(arrayDuplicado);
 //Removendo duplicados
 console.log([...new Set(arrayDuplicado)]);
+console.log();
+
+//Dicionário (Map)
+const dunderMifflin = new Map();
+dunderMifflin.set('Michael Scott', 'gerente regional');
+dunderMifflin.set('Dwight Schrute', 'vendedor');
+dunderMifflin.set('Jim Halpert', 'vendedor');
+dunderMifflin.set('Pam Beesly', 'recepcionista');
+dunderMifflin.set('Ryan Howard', 'estagiário');
+console.log(dunderMifflin);
+console.log(dunderMifflin.get('Dwight Schrute'));
+console.log(dunderMifflin.size);
+dunderMifflin.set('Ryan Howard', 'estagiário');//Não permite duplicar chaves + valores
+console.log(dunderMifflin.size);
+for (let item of dunderMifflin.keys()) console.log(item);
+console.log();
+for (let item of dunderMifflin.values()) console.log(item);
+
+var dunder = new Map();
+dunder.set('assistente do gerente regional', {cod: 1, nome: 'Dwight Schrute'});
+dunder.set('vendedor', {cod: 1, nome: 'Jim Halpert'});
+dunder.set('gerente regional', {cod: 1, nome: 'Michael Scott'});
+console.log(dunder);
+ 
+for (const [key, value] of dunderMifflin) {
+    console.log(key + ' = ' + value)
+  }
+
+console.log();
+dunderMifflin.forEach(function(value, key) {
+    console.log(key + ' = ' + value);
+});
