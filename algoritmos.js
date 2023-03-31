@@ -114,9 +114,79 @@ console.log('Array não ordenado: ' + array); //Array não ordenado: 12,11,13,5,
    
 insertionSort(array, n); 
 console.log('Array ordenado: ' + array); //Array ordenado: 5,6,11,12,13
+console.log();
 
 // Merge Sort
 // Explore recursividade
+// Dividir a matriz em duas metades, classificar cada metade e, em seguida, mesclar as metades classificadas novamente.
+// Esse processo é repetido até que todo o array esteja classificado.
+
+function merge(arr, l, m, r) {
+    var n1 = m -l + 1;
+    var n2 = r -m;
+
+    //Criando arrays temporários
+    var L = new Array(n1);
+    var R = new Array(n2);
+
+    //Copiando os dados para os arrays temporários
+    for (var i = 0; i < n1; i++) {
+        L[i] = arr[l + i];
+    }
+    for (var j = 0; j < n2; j++) {
+        R[j] = arr[m + 1 + j];
+    }
+
+    //Iniciando o processo de merge
+
+    var i = 0;
+    var j = 0;
+    var k = l;
+
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++
+    }
+
+    // Copiando o restante dos elementos de L[], se existir algum
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    // Copiando o restante dos elementos de R[], se existir algum
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+function mergeSort(arr, l, r) {// l é o índice da esquerda, r o índice da direita do sub-array arr que será ordenado
+    if (l >= r) {
+        return;//Retorna de forma recursiva
+    }
+    var m = l + parseInt((r - l) / 2);    
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    merge(arr, l, m, r);    
+}
+
+var arr = [ 12, 11, 13, 5, 6, 7 ];
+var arr_size = arr.length;
+
+console.log('Array não ordenado: ' + arr); //Array não ordenado: 12,11,13,5,6,7
+   
+mergeSort(arr, 0, arr_size - 1); 
+console.log('Array ordenado: ' + arr); //Array ordenado: 5,6,7,11,12,13
+console.log();
 
 // Quick sort
 // Define um pivô
@@ -124,8 +194,84 @@ console.log('Array ordenado: ' + array); //Array ordenado: 5,6,11,12,13
 // Redefine um pivô para cada segmento
 // Ao final retorna ordenando
 
+function quicksort(array) {
+	if (array.length <= 1) {
+		return array;
+	} else {
+		var pivot = array[0];
+		var left = [];
+		var right = [];
+		for (var i = 1; i < array.length; i++) {
+			if (array[i] < pivot) {
+				left.push(array[i]);
+			} else {
+				right.push(array[i]);
+			}
+		}
+		return quicksort(left).concat(pivot, quicksort(right));
+	}
+}
+var array = [10, 5, 2, 3, 7, 6, 8, 9, 1, 4];
+console.log('Array não ordenado: ' + array); //Array não ordenado: 10,5,2,3,7,6,8,9,1,4
+
+var sortedArray = quicksort(array);
+console.log('Array ordenado: ' + sortedArray); //Array ordenado: 1,2,3,4,5,6,7,8,9,10
+console.log();
+
 //Buscar a informação
-// Busca linear/sequencial
+//Busca linear/sequencial
+//Um algoritmo de busca sequencial que começa em uma extremidade e percorre cada elemento de uma lista até que
+// o elemento desejado seja encontrado, caso contrário, a pesquisa continua até o final do conjunto de dados.
+
+function search(arr, n, x) {
+    let i;
+    for (i = 0; i < n; i++){
+        if (arr[i] == x) {
+            return i;
+        }
+    }
+    return -1;	
+}
+
+	let newArray = [ 2, 3, 4, 10, 40 ];
+	let z = 10;
+	let m = arr.length;
+
+	// Function call
+	let result = search(newArray, m, z);
+	// console.log(result == 1 ? 'Chave encontrada' : 'Chave não encontrada');
+    (result == -1)
+        ? console.log("O elemento não está presente no array")
+        : console.log("O elemento " + z + " está presente no array no índice " + result);
+console.log();
 
 // Busca binária
+// Algoritmo de pesquisa usado em uma matriz classificada, dividindo repetidamente o intervalo de pesquisa pela metade. 
+// A ideia da busca binária é usar a informação que o array está ordenado e reduzir a complexidade de tempo para O(Log n).
 
+function binarySearch(arr, l, r, x){
+	if (r >= l) {
+		let mid = l + Math.floor((r - l) / 2);
+
+		// Se o elemento estiver presente no meio
+		if (arr[mid] == x)
+			return mid;
+
+		// Se o elemento é menor que o médio, então só pode estar presente no subarray esquerdo
+		if (arr[mid] > x)
+			return binarySearch(arr, l, mid - 1, x);
+
+		// Caso contrário, só pode estar presente no subarray direito 
+		return binarySearch(arr, mid + 1, r, x);
+	}
+
+	// Quando o elemento não está presente no array
+	return -1;
+}
+
+let arr2 = [ 2, 3, 4, 10, 40 ];
+let x2 = 10;
+let n2 = arr2.length
+let result2 = binarySearch(arr2, 0, n2 - 1, x2);
+(result2 == - 1) ? console.log("O elemento não está presente no array")
+				: console.log("O elemento " + x2 + " está presente no array no índice " + result2);
