@@ -1,9 +1,11 @@
 # Hello World JavaScript
  
- Esse repositório traz os conceitos inciais do JavaScript. 
- * Estruturas de dados,
- * estrutura de dados de árvore,
- * listas encadeadas,
- * algoritmos.
+ Este repositório faz parte do portfólio de aprendizado do curso de pós graduação em desenvolvimento fullstack da PUC-RS, da disciplina de Fundamentos de Computação e Algoritmos.
+
+ Esse repositório traz os conceitos inciais do JavaScript.
+ * <a href="visao-geral.js">Visão geral,</a> 
+ * <a href="estrutura-de-dados.js">Estruturas de dados,</a>
+ * <a href="estrutura-de-dados-de-arvore.js">Estrutura de dados de árvore,</a>
+ * <a href="listas-encadeadas.js">Listas encadeadas,</a>
+ * <a href="algoritmos">Algoritmos.</a>
  
- Rodei os comandos com o auxílio do NodeJs.
